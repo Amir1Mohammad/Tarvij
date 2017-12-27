@@ -9,3 +9,14 @@ __Author__ = "Amir Mohammad"
 from controller import app
 from models.log import Log
 from controller.extension import db
+from controller.garbage import create_log_id
+
+
+# fixme like admin
+# @app.route('/logfile',methods=['GET'])
+def add_log(username, action):
+    log_obj = Log(id=create_log_id(), username=username, action=action)
+    db.session.add(log_obj)
+    db.session.commit()
+
+add_log('amir','shal')
