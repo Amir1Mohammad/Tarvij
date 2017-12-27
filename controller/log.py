@@ -4,5 +4,8 @@
 
 __Author__ = "Amir Mohammad"
 
+
+# project import :
+from controller import app
 from models.log import Log
-from models.user import User
+from controller.extension import db

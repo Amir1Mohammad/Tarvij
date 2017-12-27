@@ -1,6 +1,6 @@
 from flask import Flask
 import os
-from application.extension import db
+from controller.extension import db
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 app.config['SECRET_KEY'] = 'topsecret'
@@ -11,4 +11,4 @@ db.init_app(app)
 
 __Author__ = "Amir Mohammad"
 
-
+from controller import log, user

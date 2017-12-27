@@ -5,7 +5,7 @@
 __Author__ = "Amir Mohammad"
 
 from flask_script import Manager
-from application import app
+from controller import app
 
 manager = Manager(app)
 from database import manager as database_manager
@@ -19,7 +19,6 @@ def run():
     run server on port 8000 and domain name is ...
     """
     app.run(host='0.0.0.0', port=8000, debug=True)
-
 
 if __name__ == '__main__':
     manager.run()

@@ -5,7 +5,7 @@
 from flask_script import Manager, prompt_bool
 
 # project imports
-from application.extension import db
+from controller.extension import db
 
 __author__ = 'Amir Mohammad'
 
