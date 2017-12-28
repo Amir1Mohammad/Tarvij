@@ -16,7 +16,10 @@ from controller.garbage import create_log_id
 # @app.route('/logfile',methods=['GET'])
 def add_log(username, action):
     log_obj = Log(id=create_log_id(), username=username, action=action)
+
     db.session.add(log_obj)
     db.session.commit()
+    print "============ add log successfully ! ============"
 
-add_log('amir','shal')
+
+# add_log(123,'shal')

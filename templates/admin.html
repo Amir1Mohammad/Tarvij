@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet" type="text/css"/>
+</head>
+
+</div>
+<body>
+<div class="login-page">
+    <div align="center">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+        <div class="my_text" align="center"><h3>صفحه ورود مدیر سایت</h3></div>
+        <div class="form">
+
+            <form class="login-form" method="post" action="/admin">
+                <input name="username" type="text" placeholder="username"/>
+                <input name="password" type="password" placeholder="password"/>
+                <input type="submit" value="Login">
+                {#      <button>Login</button>#}
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script>
+    $('.message a').click(function () {
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+
+</script>
