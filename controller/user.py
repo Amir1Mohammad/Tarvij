@@ -1,39 +1,29 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# find . -name "*.pyc" -exec rm -rf {} \;
 
-from flask import redirect, request, render_template, flash
+
+__author__ = "Amir Mohammad"
+
+
+
+
+# flask imports :
+from flask import render_template
+
+# project imports :
 from controller import app
-from environ import name,mypassword,check_hash,get_hash
-
-# from forms.user import LoginForm
 
 
-# ...
-
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
-    form = LoginForm()
-    return render_template('login.html', title='Sign In', form=form)
-
-
-@app.route('/admin')
-def load_admin():
-    return render_template('admin.html')
-
-
-@app.route('/admin', methods=['GET','POST'])
-def admin():
-    username = request.form['username']
-    password = request.form['password']
-    if username==name and password==mypassword:
-        return '''
-        <h1>Logged in</h1>
-        '''
-    else:
-        flash(u'نام کاربری یا رمز عبور خود را اشتباه وارد کردید')
-        return redirect('/admin')
-
-
+    return render_template('login.html')
 
 
 def log_out():
     pass
+
+
+@app.route('/accept', methods=['GET'])
+def accept():
+    return render_template('accept.html')
