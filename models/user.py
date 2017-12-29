@@ -19,5 +19,29 @@ class User(db.Model):
     lastname = db.Column(db.Unicode(254))
     gender = db.Column(db.Enum('Male', 'Female', name='gender'), default='Male', nullable=True)
     phones = db.Column(db.BigInteger, nullable=False)
-    brand = db.Column(db.Unicode(254),nullable=False)
+    brand = db.Column(db.Unicode(254), nullable=False)
     category = db.Column(db.Unicode(254), nullable=False)
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        try:
+            return unicode(self.id)  # python 2
+        except NameError:
+            return str(self.id)  # python 3
+
+    def __repr__(self):
+        return '<User %r>' % (self.username)
+
+
+1
