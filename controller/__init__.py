@@ -1,7 +1,7 @@
 from flask import Flask
 import os
 from controller.extension import db
-from extension import login_manager
+# from extension import login_manager
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 app.config['SECRET_KEY'] = 'topsecret'

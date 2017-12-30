@@ -4,6 +4,8 @@
 from datetime import datetime
 
 # project import
+from flask import session
+
 from controller.extension import db
 
 __author__ = 'Amir Mohammad'
@@ -43,5 +45,13 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % (self.username)
 
+    def login(self):
+        session['username'] = self.username
 
-1
+    @staticmethod
+    def logout():
+        session.pop('username', None)
+
+    @staticmethod
+    def logged_in_user():
+        return session.get('username', None)

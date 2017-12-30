@@ -15,7 +15,6 @@ from garbage import create_user_id
 __Author__ = "Amir Mohammad"
 
 
-# fixme . maybe the table is not created .
 @app.route('/admin', methods=['POST'])
 def add_admin(username, passwordhash, firstname, lastname, gender, phones, brand, category):
     user_obj = User(id=create_user_id(), username=username, passwordhash=passwordhash, firstname=firstname,
