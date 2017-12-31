@@ -26,7 +26,7 @@ def login():
 def index():
     return render_template('login.html')
 
-@app.route('/logout')
+@app.route("/logout")
 def logout():
     User.logout()
 

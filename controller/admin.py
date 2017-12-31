@@ -4,10 +4,12 @@
 
 
 # flask imports :
+from flask import render_template
 
 
 # project imports :
 from models.user import User
+from models.log import Log
 from controller import app
 from controller.extension import db
 from garbage import create_user_id
@@ -31,13 +33,17 @@ def delete_admin(username):
     db.session.commit()
 
 
-def show_log_name():
-    pass
+@app.route('/log/<username>')
+def show_log_name(username):
+    log_obj_q = Log.query.filter_by(username=username).first_or_404()
+    return render_template('show_user_name.html', log_obj_q=log_obj_q)
 
 
-def show_log_date():
-    pass
-
-
+# fixme : only show first log on DB .
+@app.route('/log', methods=['GET'])
 def show_log_all():
-    pass
+    log_obj_q = Log.query.order_by(Log.username).all()
+    print "username is : ", log_obj_q.username
+    # print "action is : ", log_obj_q.action
+    # print "time is : ", log_obj_q.time
+    return render_template('show_user_date.html', log_obj_q=log_obj_q)
