@@ -11,14 +11,17 @@ from flask import render_template, flash, request, redirect, url_for, abort
 from controller import app
 from models.user import User
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/admin_home', methods=['GET','POST'])
 def login():
     username = request.form['username']
     password = request.form['password']
     user_obj = User.query.filter_by(username=username).first_or_404()
-    if user_obj.password!=password:
+    if user_obj.passwordhash != password:
         abort(403)
     user_obj.login()
+    return render_template('admin_home.html')
+
+
 
 
 @app.route('/')
@@ -28,6 +31,8 @@ def index():
 @app.route("/logout")
 def logout():
     User.logout()
+
+
 
 # @app.route('/accept', methods=['GET'])
 # def accept():

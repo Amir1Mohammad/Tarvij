@@ -4,7 +4,7 @@
 
 
 # flask imports :
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 
 # project imports :
 from models.user import User
@@ -16,8 +16,21 @@ from garbage import create_user_id
 __Author__ = "Amir Mohammad"
 
 
-@app.route('/admin/<username>/<passwordhash>/<firstname>/<lastname>/<gender>/<phones>/<brand>/<category>', methods=['GET','POST'])
-def add_admin(username, passwordhash, firstname, lastname, gender, phones, brand, category):
+@app.route('/add',methods=['POST','GET'])
+def render():
+    return render_template('add_admin.html')
+
+
+@app.route('/add_admin',methods=['POST','GET'])
+def add_admin():
+    username = request.form['username']
+    passwordhash = request.form['password']
+    firstname = request.form['firstname']
+    lastname = request.form['lastname']
+    gender = request.form['gender']
+    phones = request.form['phone']
+    brand = request.form['brand']
+    category = request.form['category']
     user_obj = User(id=create_user_id(), username=username, passwordhash=passwordhash, firstname=firstname,
                     lastname=lastname,
                     gender=gender, phones=phones, brand=brand, category=category)
@@ -25,7 +38,8 @@ def add_admin(username, passwordhash, firstname, lastname, gender, phones, brand
     db.session.add(user_obj)
     db.session.commit()
 
-    return jsonify(user_obj.to_json()),200
+    return "added successfully"
+
 
 def delete_admin(username):
     user_obj = User(username=username)
@@ -49,3 +63,15 @@ def show_log_all():
     # print "action is : ", log_obj_q.action
     # print "time is : ", log_obj_q.time
     return render_template('show_user_date.html', log_obj_q=log_obj_q)
+
+
+@app.route('/', methods= ['GET', 'Post'])
+def to_add_admin():
+    if request.form['Work'] == 'add_admin' :
+        return render_template('add_admin.html')
+
+    elif request.form['Work'] == 'view_logs':
+        return render_template('logs.html')
+
+    else :
+        return render_template('accept.html')
