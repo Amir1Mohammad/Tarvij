@@ -24,6 +24,21 @@ class User(db.Model):
     brand = db.Column(db.Unicode(254), nullable=False)
     category = db.Column(db.Unicode(254), nullable=False)
 
+    logs = db.relationship("Log", lazy='dynamic', backref='user')
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'firstname': self.firstname,
+            'lastname': self.lastname,
+            'gender': self.gender,
+            'phones': self.phones,
+            'brand': self.brand,
+            'category': self.category,
+            'logs': [log.to_json() for log in self.logs],
+
+        }
     @property
     def is_authenticated(self):
         return True

@@ -21,7 +21,6 @@ def login():
     user_obj.login()
 
 
-
 @app.route('/')
 def index():
     return render_template('login.html')
