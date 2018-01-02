@@ -16,11 +16,12 @@ from models.handbook import Handbook
 from controller.extension import db
 from log import add_log
 
+
 # TODO add log in the functions .
 # TODO for login and logout and add_data and delete_data .
 
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "GET":
         if User.logged_in_user() is None:
@@ -51,7 +52,7 @@ def index():
     return render_template('login.html')
 
 
-@app.route("/logout", methods=["POST", 'GET'] )
+@app.route("/logout", methods=["POST", 'GET'])
 def logout():
     username = User.logged_in_user()
     add_log(username, "Logout")
@@ -61,27 +62,27 @@ def logout():
 
 @app.route('/matlab', methods=['POST', 'GET'])
 def submit1():
+
     title = request.form['title']
     contetnt = request.form['content']
-
-
-    macro_obj = Mac( username = User.logged_in_user(), title = title, content = contetnt)
+    macro_obj = Mac(username=User.logged_in_user(), title=title, content=contetnt)
     db.session.add(macro_obj)
     db.session.commit()
     user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
-    add_log(User.logged_in_user(), "Submit Button 1")
+    add_log(User.logged_in_user(), "Adding data with form 1")
     return jsonify(user_obj.to_json()), 200
 
 
 @app.route('/handbook', methods=['POST', 'GET'])
 def submit2():
     book = request.form['book']
-    handbook_obj = Handbook(username = User.logged_in_user(), handbook = book)
+    handbook_obj = Handbook(username=User.logged_in_user(), handbook=book)
     db.session.add(handbook_obj)
     db.session.commit()
     user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
-    add_log(User.logged_in_user(), "Submit Button 4")
+    add_log(User.logged_in_user(), "Adding data with form 4")
     return jsonify(user_obj.to_json()), 200
+
 # @app.route('/accept', methods=['GET'])
 # def accept():
 #     return render_template('accept.html')

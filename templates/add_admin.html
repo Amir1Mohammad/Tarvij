@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>add new admins</title>
+
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
+
+
+<br>
 
 <body>
 
-<form action="/add_admin" method="post">
-  Username:<br>
+
+    <style>
+body {
+    background-color:lightgray;
+}
+</style>
+
+
+<div align="center">
+<form action="/logout" method="post">
+    <input class="btn btn-danger" type="submit" value="logout">
+</form>
+<br><br>
+    <form action="/add_admin" method="post">
+  <b>Username:<br>
   <input type="text" name="username" value="">
   <br>
   Password:<br>
@@ -33,19 +56,16 @@
     Category:<br>
   <input type="text" name="category" value="">
   <br>
-
+  </b>
   <br><br>
-  <input type="submit" value="Add Admin">
+  <input type="submit" class="btn btn-primary" value="Add Admin">
 </form>
-
+</div>
 
 <br>
 <br>
 <br>
 
-<form action="/logout" method="post">
-    <input type="submit" value="logout">
-</form>
 
 
 </body>

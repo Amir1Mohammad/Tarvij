@@ -4,7 +4,7 @@
 
 
 # flask imports :
-from flask import render_template, jsonify, request, abort
+from flask import render_template, jsonify, request, abort, redirect
 
 # project imports :
 from models.user import User
@@ -55,9 +55,7 @@ def show_log_name(username):
 def show_log_all():
     if User.logged_in_user() == "tecvest@1010":
         log_obj_q = Log.query.all()
-        print "===================================="
-        print jsonify(logs=[i.to_json(with_user=True) for i in log_obj_q]), 200
-        print "===================================="
+        # print jsonify(logs=[i.to_json(with_user=True) for i in log_obj_q]), 200
         # print "action is : ", log_obj_q.action
         # print "time is : ", log_obj_q.time
         return render_template('show_user_date.html', log_obj_q=log_obj_q)
@@ -71,4 +69,4 @@ def to_add_admin():
         return render_template('add_admin.html')
 
     elif request.form['Work'] == 'view_logs':
-        return render_template('logs.html')
+        return redirect('log')

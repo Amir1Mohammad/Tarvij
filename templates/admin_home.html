@@ -2,26 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>home</title>
+    <br><br>
+    <div align="center">
+        <form action="/logout" method="post">
+            <input type="submit" class="btn btn-danger" value="logout">
+        </form>
+    </div>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <style>
+body {
+    background-color:lightgray;
+}
+</style>
+
+<br><br><br><br><br>
 <form action="/" method="post">
-
-    <br>
-    What DO You Want To Do? :<br>
-    <input type="radio" name="Work" value="add_admin" checked> Add New Admin<br>
-  <input type="radio" name="Work" value="view_logs"> View Admins works<br>
-    <br>
-    <br><br>
-  <input type="submit" value="Do">
-</form>
-
-<br>
-<br>
-<br>
-
-<form action="/logout" method="post">
-    <input type="submit" value="logout">
+    <div align="center">
+        <br>
+        <h2><b>What DO You Want To Do? :</b></h2>
+        <br>
+        <label class="btn btn-primary active">
+            <input type="radio" name="Work" value="add_admin" checked> Add New Admin<br>
+        </label>
+        <label class="btn btn-primary active">
+            <input type="radio" name="Work" value="view_logs"> View Admins works<br>
+        </label>
+        <br>
+        <br><br>
+        <input type="submit" class="btn btn-success" value="Do it the button !">
 </form>
 
 

@@ -3,39 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Entering Data</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
+    <style>
+body {
+    background-color:lightgray;
+}
+</style>
+
+<br>
+
 
 <form action="/matlab" method="post">
-  Title:<br>
+    <div align="center">
+        Please Enter your Content for Button 1 ...
+        <ul></ul>
+    <b>
+  Subject:
   <input type="text" name="title" value="">
-  <br>
+  <br><br>
+
     Content:<br>
     <textarea name="content" rows="4" cols="50">
     </textarea>
+
         <br>
-        <br><br>
-  <input type="submit" value="Add">
+  <input type="submit" class="btn btn-primary" value="Add Data ...">
+    </b>
+
 </form>
-        <br><br>
-        <br><br>
-        <br><br>
+    <br>
+<h4>Enter your Content for Button 4 ...</h4>
 <form action="/handbook" method="post">
- <textarea name="book" rows="10" cols="200">
+ <textarea name="book" rows="11" cols="150">
     </textarea>
 <br><br>
-  <input type="submit" value="submit">
+  <input class="btn btn-success" type="submit" value="Submit">
 
 </form>
-
-<br>
-<br>
-<br>
-
+    <br>
 <form action="/logout" method="post">
-    <input type="submit" value="logout">
+    <input class="btn btn-danger" type="submit" value="logout account">
 </form>
+
+</div>
+
+<br>
 
 </body>
 </html>
