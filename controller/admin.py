@@ -50,16 +50,18 @@ def delete_admin(username):
 @app.route('/log/<username>')
 def show_log_name(username):
     user_obj = User.query.filter_by(username=username).first_or_404()
-    return jsonify(user_obj.to_json()), 200
-    # return render_template('show_user_name.html'log_obj_q, log_obj_q=)
+    print user_obj.to_json()
+    return jsonify(user_obj.to_json())
+    return render_template('show_user_name.html', log_obj_q=user_obj.to_json())
 
 
 # fixme : only show first log on DB .
 @app.route('/log', methods=['GET'])
 def show_log_all():
     log_obj_q = Log.query.all()
-
+    print "===================================="
     print "usernames : ", [i.to_json() for i in log_obj_q]
+    print "===================================="
     # print "action is : ", log_obj_q.action
     # print "time is : ", log_obj_q.time
     return render_template('show_user_date.html', log_obj_q=log_obj_q)

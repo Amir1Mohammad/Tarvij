@@ -13,11 +13,14 @@
 	<div class="panel panel-default">
 		<div class="panel-body" align="center">
 
-            <p>نوع کار انجام شده :<td class="col-sm-3">{{ log_obj_q.action}}</td></p>
-            <p>در ساعت : <td class="col-sm-1">{{ log_obj_q.time }}</td></p>
-            <p>ردیف :<td class="col-sm-4">{{ log_obj_q.id }}</td></p>
-            <p>کار انجام شده توسط :<td class="col-sm-3">{{ log_obj_q.username}}</td></p>
-            </td>
+            {% for q in log_obj_q %}
+                <p>نوع کار انجام شده :<td class="col-sm-3">{{ q.action}}</td></p>
+                <p>در ساعت : <td class="col-sm-1">{{ q.time }}</td></p>
+                <p>ردیف :<td class="col-sm-4">{{ q.id }}</td></p>
+                <p>کار انجام شده توسط :<td class="col-sm-3">{{ q.username}}</td></p>
+                </td>
+            {% endfor %}
+
 
 
 
