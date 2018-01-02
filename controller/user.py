@@ -53,8 +53,9 @@ def index():
 
 @app.route("/logout", methods=["POST", 'GET'] )
 def logout():
+    username = User.logged_in_user()
+    add_log(username, "Logout")
     User.logout()
-    add_log(User.get_id(), "Logout")
     return render_template('login.html')
 
 

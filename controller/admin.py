@@ -16,11 +16,6 @@ from garbage import create_user_id
 __Author__ = "Amir Mohammad"
 
 
-@app.route('/add',methods=['POST','GET'])
-def render():
-    return render_template('add_admin.html')
-
-
 @app.route('/add_admin',methods=['POST','GET'])
 def add_admin():
     username = request.form['username']
