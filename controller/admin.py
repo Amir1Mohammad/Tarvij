@@ -74,6 +74,3 @@ def to_add_admin():
 
     elif request.form['Work'] == 'view_logs':
         return render_template('logs.html')
-
-    else :
-        return render_template('accept.html')

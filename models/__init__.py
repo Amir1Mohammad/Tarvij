@@ -6,3 +6,5 @@ __Author__ = "Amir Mohammad"
 
 from models.log import Log
 from models.user import User
+from models.macros import Mac
+from models.handbook import Handbook

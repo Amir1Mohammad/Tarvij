@@ -12,7 +12,7 @@ from models.log import Log
 __Author__ = "Amir Mohammad"
 
 
-@app.route("/<string:username>/<string:action>")
+# @app.route("/<string:username>/<string:action>")
 def add_log(username, action):
     user_obj = User.query.filter_by(username=username).first_or_404()
     log_obj = Log(user=user_obj, action=action)
