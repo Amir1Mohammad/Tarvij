@@ -26,7 +26,11 @@ class User(db.Model):
 
     logs = db.relationship("Log", lazy='dynamic', backref='user')
 
-    def to_json(self):
+    def to_json(self, with_logs = False):
+        if with_logs:
+            _dict = self.to_json()
+            _dict['logs'] = [log.to_json() for log in self.logs]
+            return _dict
         return {
             'id': self.id,
             'username': self.username,
@@ -36,8 +40,6 @@ class User(db.Model):
             'phones': self.phones,
             'brand': self.brand,
             'category': self.category,
-            'logs': [log.to_json() for log in self.logs],
-
         }
     @property
     def is_authenticated(self):

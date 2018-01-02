@@ -4,7 +4,7 @@
 
 
 # flask imports :
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request, abort
 
 # project imports :
 from models.user import User
@@ -38,7 +38,7 @@ def add_admin():
     db.session.add(user_obj)
     db.session.commit()
 
-    return "added successfully"
+    return jsonify(msg = "added successfully"), 200
 
 
 def delete_admin(username):
@@ -52,19 +52,22 @@ def show_log_name(username):
     user_obj = User.query.filter_by(username=username).first_or_404()
     print user_obj.to_json()
     return jsonify(user_obj.to_json())
-    return render_template('show_user_name.html', log_obj_q=user_obj.to_json())
+    # return render_template('show_user_name.html', log_obj_q=user_obj.to_json())
 
 
 # fixme : only show first log on DB .
 @app.route('/log', methods=['GET'])
 def show_log_all():
-    log_obj_q = Log.query.all()
-    print "===================================="
-    print "usernames : ", [i.to_json() for i in log_obj_q]
-    print "===================================="
-    # print "action is : ", log_obj_q.action
-    # print "time is : ", log_obj_q.time
-    return render_template('show_user_date.html', log_obj_q=log_obj_q)
+    if User.logged_in_user() == "tecvest@1010":
+        log_obj_q = Log.query.all()
+        print "===================================="
+        print jsonify(logs=[i.to_json(with_user=True) for i in log_obj_q]), 200
+        print "===================================="
+        # print "action is : ", log_obj_q.action
+        # print "time is : ", log_obj_q.time
+        return render_template('show_user_date.html', log_obj_q=log_obj_q)
+    else:
+        abort(403)
 
 
 @app.route('/', methods= ['GET', 'Post'])

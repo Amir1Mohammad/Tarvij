@@ -16,7 +16,11 @@ class Log(db.Model):
     action = db.Column(db.String(25), nullable=False)
     time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    def to_json(self):
+    def to_json(self, with_user=False):
+        if with_user:
+            _dict = self.to_json()
+            _dict['user'] = self.user.to_json()
+            return _dict
         return {
             'id': self.id,
             'action': self.action,
