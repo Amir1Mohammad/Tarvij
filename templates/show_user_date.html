@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Log file<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+
+
     <title>Log file</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+<div align="center">
+<form action="/logout" method="post">
+    <input class="btn btn-danger" type="submit" value="logout">
+</form>
+</div>
 <div align="right">
 {% block page_content %}
 	<div class="panel panel-default">
@@ -30,19 +38,5 @@
 	</div>
 {% endblock %}
 </div>
-</body>
-</html></title>
-</head>
-<body>
-
-
-<br>
-<br>
-<br>
-
-<form action="/logout" method="post">
-    <input type="submit" value="logout">
-</form>
-
 </body>
 </html>

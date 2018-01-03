@@ -5,8 +5,6 @@
 
 # flask imports :
 from flask import render_template, jsonify, request, abort, redirect
-# python imports :
-import unicodedata
 
 # project imports :
 from models.user import User
@@ -20,35 +18,48 @@ __Author__ = "Amir Mohammad"
 
 @app.route('/add_admin',methods=['POST','GET'])
 def add_admin():
-    username = request.form['username']
-    passwordhash = request.form['password']
-    firstname = request.form['firstname']
-    lastname = request.form['lastname']
-    gender = request.form['gender']
-    phones = request.form['phone']
-    brand = request.form['brand']
-    category = request.form['category']
-    user_obj = User(id=create_user_id(), username=username, passwordhash=passwordhash, firstname=firstname,
-                    lastname=lastname,
-                    gender=gender, phones=phones, brand=brand, category=category)
+    try:
+        username = request.form['username']
+        passwordhash = request.form['password']
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        gender = request.form['gender']
+        phones = request.form['phone']
+        brand = request.form['brand']
+        category = request.form['category']
 
-    db.session.add(user_obj)
-    db.session.commit()
+        user_obj = User(id=create_user_id(), username=username, passwordhash=passwordhash,
+                        firstname=firstname,lastname=lastname,gender=gender, phones=phones,
+                        brand=brand, category=category)
 
-    return jsonify(msg = "added successfully"), 200
+        db.session.add(user_obj)
+        db.session.commit()
+        return "Admin Added Successfully", 200
 
+    except:
+        return '''
+        <h2>Noooo ! The User is not add . try again</h2>
+        '''
 
+@app.route('/login/delete/<username>')
 def delete_admin(username):
-    user_obj = User(username=username)
-    db.session.delete(user_obj)
-    db.session.commit()
+    if User.logged_in_user():
+        q = User.query.filter_by(username=username).first()
+        print q
+        if q is not None:
+            User.query.filter_by(username=username).delete()
+            return '''
+            <h1>The User is Deleted</1>''',200
+        else:
+            return '''<h1>The User not exist !</h1>'''
+    else:
+        abort(403)
 
 
 @app.route('/log/<username>')
 def show_log_name(username):
     user_obj = User.query.filter_by(username=username).first_or_404()
     print user_obj.to_json()
-
     return jsonify(user_obj.to_json())
     # return render_template('show_user_name.html', log_obj_q=user_obj.to_json())
 

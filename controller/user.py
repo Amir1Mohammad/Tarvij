@@ -83,7 +83,3 @@ def submit2():
     user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
     add_log(User.logged_in_user(), "Adding data with form 4")
     return jsonify(user_obj.to_json()), 200
-
-# @app.route('/accept', methods=['GET'])
-# def accept():
-#     return render_template('accept.html')
