@@ -3,9 +3,10 @@
 # python imports
 from datetime import datetime
 
-# project import
+# project import :
 from flask import session
 
+# project imports :
 from controller.extension import db
 
 __author__ = 'Amir Mohammad'
@@ -26,7 +27,7 @@ class User(db.Model):
 
     logs = db.relationship("Log", lazy='dynamic', backref='user')
 
-    def to_json(self, with_logs = False):
+    def to_json(self, with_logs=False):
         if with_logs:
             _dict = self.to_json()
             _dict['logs'] = [log.to_json() for log in self.logs]
@@ -41,6 +42,7 @@ class User(db.Model):
             'brand': self.brand,
             'category': self.category,
         }
+
     @property
     def is_authenticated(self):
         return True

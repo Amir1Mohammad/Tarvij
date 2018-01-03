@@ -16,9 +16,13 @@ from garbage import create_user_id
 __Author__ = "Amir Mohammad"
 
 
-@app.route('/add_admin',methods=['POST','GET'])
+@app.route('/add_admin', methods=['POST', 'GET'])
 def add_admin():
-    try:
+    if request.method == "GET":
+        if User.logged_in_user() is None:
+            abort(403)
+
+    elif request.method == "POST":
         username = request.form['username']
         passwordhash = request.form['password']
         firstname = request.form['firstname']
@@ -29,27 +33,23 @@ def add_admin():
         category = request.form['category']
 
         user_obj = User(id=create_user_id(), username=username, passwordhash=passwordhash,
-                        firstname=firstname,lastname=lastname,gender=gender, phones=phones,
+                        firstname=firstname, lastname=lastname, gender=gender, phones=phones,
                         brand=brand, category=category)
 
         db.session.add(user_obj)
         db.session.commit()
         return "Admin Added Successfully", 200
 
-    except:
-        return '''
-        <h2>Noooo ! The User is not add . try again</h2>
-        '''
 
 @app.route('/login/delete/<username>')
 def delete_admin(username):
-    if User.logged_in_user():
+    if User.logged_in_user() == "tecvest@1010":
         q = User.query.filter_by(username=username).first()
         print q
         if q is not None:
             User.query.filter_by(username=username).delete()
             return '''
-            <h1>The User is Deleted</1>''',200
+            <h1>The User is Deleted</1>''', 200
         else:
             return '''<h1>The User not exist !</h1>'''
     else:
@@ -64,7 +64,6 @@ def show_log_name(username):
     # return render_template('show_user_name.html', log_obj_q=user_obj.to_json())
 
 
-# fixme : only show first log on DB .
 @app.route('/log', methods=['GET'])
 def show_log_all():
     if User.logged_in_user() == "tecvest@1010":
@@ -77,9 +76,9 @@ def show_log_all():
         abort(403)
 
 
-@app.route('/', methods= ['GET', 'Post'])
+@app.route('/', methods=['GET', 'Post'])
 def to_add_admin():
-    if request.form['Work'] == 'add_admin' :
+    if request.form['Work'] == 'add_admin':
         return render_template('add_admin.html')
 
     elif request.form['Work'] == 'view_logs':

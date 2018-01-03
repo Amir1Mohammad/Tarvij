@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # find . -name "*.pyc" -exec rm -rf {} \;
-from controller.garbage import create_user_id
+
 
 __author__ = "Amir Mohammad"
 
 # flask imports :
-from flask import render_template, flash, request, redirect, url_for, abort, jsonify
-
+from flask import render_template, request, redirect, url_for, abort, jsonify
 
 # project imports :
 from controller import app
@@ -16,10 +15,6 @@ from models.macros import Mac
 from models.handbook import Handbook
 from controller.extension import db
 from log import add_log
-
-
-# TODO add log in the functions .
-# TODO for login and logout and add_data and delete_data .
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -63,7 +58,6 @@ def logout():
 
 @app.route('/matlab', methods=['POST', 'GET'])
 def submit1():
-
     title = request.form['title']
     contetnt = request.form['content']
     macro_obj = Mac(username=User.logged_in_user(), title=title, content=contetnt)
