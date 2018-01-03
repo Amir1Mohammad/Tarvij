@@ -8,6 +8,7 @@ __author__ = "Amir Mohammad"
 # flask imports :
 from flask import render_template, flash, request, redirect, url_for, abort, jsonify
 
+
 # project imports :
 from controller import app
 from models.user import User

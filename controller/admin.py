@@ -5,6 +5,8 @@
 
 # flask imports :
 from flask import render_template, jsonify, request, abort, redirect
+# python imports :
+import unicodedata
 
 # project imports :
 from models.user import User
@@ -46,6 +48,7 @@ def delete_admin(username):
 def show_log_name(username):
     user_obj = User.query.filter_by(username=username).first_or_404()
     print user_obj.to_json()
+
     return jsonify(user_obj.to_json())
     # return render_template('show_user_name.html', log_obj_q=user_obj.to_json())
 
