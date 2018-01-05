@@ -32,6 +32,11 @@ var/
 .installed.cfg
 *.egg
 *~
+*.png
+*.jpg
+*.jpeg
+*.docx
+*.doc
 *.pyc
 # PyInstaller
 #  Usually these files are written by a python script from a template

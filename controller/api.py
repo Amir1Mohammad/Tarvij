@@ -4,21 +4,45 @@
 
 
 # flask imports :
-from controller import app
-
-
+from flask import jsonify, abort, request, render_template
+from werkzeug.utils import secure_filename
 # project imports:
 from models.macros import Mac
 from models.handbook import Handbook
+from controller import app
+from models.user import User
 
 
-@app.route('/api/butt1')
-# TODO first login then can get data
-def show_one():
-    pass
+@app.route('/api/title/<string:username>', methods=['GET', 'POST'])
+def see_mac(username):
+    if User.logged_in_user() == "tecvest@1010":
+        listme = []
+        o = Mac.query.filter_by(username=username).all()
+        for row in o:
+            show = {
+                'username': row.username,
+                'title': row.title,
+                'content': row.content,
+            }
+
+            listme.append(show)
+        return jsonify(jsonify=listme), 200
+    else:
+        abort(403)
 
 
-@app.route('/api/butt2')
-# TODO first login then can get data
-def show_two():
-    pass
+@app.route('/api/content/<string:username>', methods=['POST', 'GET'])
+def show_two(username):
+    if User.logged_in_user() == "tecvest@1010":
+        listme = []
+        o = Handbook.query.filter_by(username=username).all()
+        for row in o:
+            show = {
+                'username': row.username,
+                'handbook': row.handbook,
+            }
+
+            listme.append(show)
+        return jsonify(jsonify=listme), 200
+    else:
+        abort(403)
