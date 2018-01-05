@@ -4,8 +4,8 @@
 
 
 # flask imports :
-from flask import jsonify, abort, request, render_template
-from werkzeug.utils import secure_filename
+from flask import jsonify, abort, send_file
+
 # project imports:
 from models.macros import Mac
 from models.handbook import Handbook
@@ -41,8 +41,23 @@ def show_two(username):
                 'username': row.username,
                 'handbook': row.handbook,
             }
-
             listme.append(show)
         return jsonify(jsonify=listme), 200
     else:
         abort(403)
+
+
+# @app.route('/file')
+# def file_downloads():
+#     try:
+#         return render_template('down.html')
+#     except Exception as e:
+#         return str(e)
+
+
+# @app.route('/shows')
+# def return_files_tut():
+#     try:
+#         return send_file('test.png')
+#     except Exception as e:
+#         return str(e)

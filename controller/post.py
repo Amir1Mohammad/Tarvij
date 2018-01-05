@@ -5,12 +5,12 @@
 __Author__ = "Amir Mohammad"
 
 # python imports :
-
+import os
 
 # flask imports :
 from flask import request, jsonify, flash, redirect
 from werkzeug.utils import secure_filename
-import os
+
 
 # project imports :
 from controller import db, app
@@ -67,8 +67,7 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # return redirect(url_for('uploaded_file',
-            #                         filename=filename))
+            # return redirect(url_for('uploaded_file'))
             return '''
             <h2>File uploaded Completely</h3>'''
 
