@@ -36,6 +36,7 @@ var/
 *.jpg
 *.jpeg
 *.docx
+*.pdf
 *.doc
 *.pyc
 # PyInstaller
