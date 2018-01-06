@@ -21,7 +21,11 @@ def see_mac(username):
         for row in o:
             show = {
                 'username': row.username,
-                'title': row.title,
+                'title1': row.title1,
+                'title2': row.title2,
+                'title3': row.title3,
+                'title4': row.title4,
+                'title5': row.title5,
                 'content': row.content,
             }
 

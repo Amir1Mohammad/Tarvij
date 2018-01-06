@@ -23,13 +23,21 @@ from garbage import allowed_file
 
 @app.route('/matlab', methods=['POST', 'GET'])
 def submit1():
-    title = request.form['title']
+    title1 = request.form['title1']
+    title2 = request.form['title2']
+    title3 = request.form['title3']
+    title4 = request.form['title4']
+    title5 = request.form['title5']
+
     contetnt = request.form['content']
-    macro_obj = Mac(username=User.logged_in_user(), title=title, content=contetnt)
+    macro_obj = Mac(username=User.logged_in_user(), title1=title1,title2=title2,title3=title3,
+                    title4=title4, title5=title5, content=contetnt)
     db.session.add(macro_obj)
     db.session.commit()
     user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
     add_log(User.logged_in_user(), "Adding data with form 1")
+
+    # TODO . show accept page .
     return jsonify(user_obj.to_json()), 200
 
 
