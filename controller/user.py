@@ -9,14 +9,25 @@ __author__ = "Amir Mohammad"
 from flask import render_template, request, abort
 
 # project imports :
-from controller import app
+from controller import app,db
 from models.user import User
 from log import add_log
 
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    exist_admin = User.query.filter_by(username="tecvest@1010").first()
+    if not exist_admin:
+        user_obj = User(username="tecvest@1010", passwordhash="09128020911",
+                        firstname="tosan", lastname="tosan", gender="Male", phones="09128020911",
+                        brand="none", category="none")
+
+        db.session.add(user_obj)
+        db.session.commit()
+        return render_template('login.html')
+
+    else:
+        return render_template('login.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -43,8 +54,6 @@ def login():
             return render_template("enter_data.html")
     else:
         abort(405)
-
-
 
 
 @app.route("/logout", methods=["POST", 'GET'])
