@@ -15,7 +15,7 @@ from werkzeug.utils import secure_filename
 # project imports :
 from controller import db, app
 from models.user import User
-from models.handbook import Handbook
+from models.handbook import HandBook
 from models.macros import Mac
 from controller.log import add_log
 from garbage import allowed_file
@@ -36,7 +36,7 @@ def submit1():
 @app.route('/handbook', methods=['POST', 'GET'])
 def submit2():
     book = request.form['book']
-    handbook_obj = Handbook(username=User.logged_in_user(), handbook=book)
+    handbook_obj = HandBook(username=User.logged_in_user(), handBook=book)
     db.session.add(handbook_obj)
     db.session.commit()
     user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()

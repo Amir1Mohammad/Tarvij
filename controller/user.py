@@ -14,6 +14,11 @@ from models.user import User
 from log import add_log
 
 
+@app.route('/')
+def index():
+    return render_template('login.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "GET":
@@ -40,9 +45,6 @@ def login():
         abort(405)
 
 
-@app.route('/')
-def index():
-    return render_template('login.html')
 
 
 @app.route("/logout", methods=["POST", 'GET'])

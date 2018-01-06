@@ -8,7 +8,7 @@ from flask import jsonify, abort, send_file
 
 # project imports:
 from models.macros import Mac
-from models.handbook import Handbook
+from models.handbook import HandBook
 from controller import app
 from models.user import User
 
@@ -35,11 +35,11 @@ def see_mac(username):
 def show_two(username):
     if User.logged_in_user() == "tecvest@1010":
         listme = []
-        o = Handbook.query.filter_by(username=username).all()
+        o = HandBook.query.filter_by(username=username).all()
         for row in o:
             show = {
                 'username': row.username,
-                'handbook': row.handbook,
+                'handBook': row.handBook,
             }
             listme.append(show)
         return jsonify(jsonify=listme), 200

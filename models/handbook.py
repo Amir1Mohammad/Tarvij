@@ -6,7 +6,7 @@ from controller.extension import db
 __author__ = 'Sepehr'
 
 
-class Handbook(db.Model):
+class HandBook(db.Model):
     __tablename__ = 'handbook'
 
     id = db.Column(db.Integer, primary_key=True)
