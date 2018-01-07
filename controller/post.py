@@ -8,7 +8,7 @@ __Author__ = "Amir Mohammad"
 import os
 
 # flask imports :
-from flask import request, jsonify, flash, redirect
+from flask import request, jsonify, abort, render_template
 from werkzeug.utils import secure_filename
 
 
@@ -23,23 +23,39 @@ from garbage import allowed_file
 
 @app.route('/matlab', methods=['POST', 'GET'])
 def submit1():
-    title1 = request.form['title1']
-    title2 = request.form['title2']
-    title3 = request.form['title3']
-    title4 = request.form['title4']
-    title5 = request.form['title5']
+    if request.method == 'GET':
+        if User.logged_in_user() is None:
+            abort(403)
+        else:
+            return render_template("enter_data.html")
 
-    contetnt = request.form['content']
-    macro_obj = Mac(username=User.logged_in_user(), title1=title1,title2=title2,title3=title3,
-                    title4=title4, title5=title5, content=contetnt)
-    db.session.add(macro_obj)
-    db.session.commit()
-    user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
-    add_log(User.logged_in_user(), "Adding data with form 1")
+    elif request.method == 'POST':
+        title1 = request.form['title1']
+        title2 = request.form['title2']
+        title3 = request.form['title3']
+        title4 = request.form['title4']
+        title5 = request.form['title5']
+        contetnt = request.form['content']
 
-    # TODO . show accept page .
-    return jsonify(user_obj.to_json()), 200
+        macro_obj = Mac(username=User.logged_in_user(), title1=title1,title2=title2,title3=title3,
+                        title4=title4, title5=title5, content=contetnt)
 
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    if title1.strip() != '' and contetnt.strip() != '':
+        db.session.add(macro_obj)
+        db.session.commit()
+        user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
+        add_log(User.logged_in_user(), "Adding data with form 1")
+        # TODO . show accept page and add back .
+        return jsonify(user_obj.to_json()), 200
+    else:
+        return '''
+        The data is not valid . please check it again ...
+        '''
+    
 
 @app.route('/handbook', methods=['POST', 'GET'])
 def submit2():
@@ -52,11 +68,16 @@ def submit2():
     return jsonify(user_obj.to_json()), 200
 
 
-# fixme . if the name is same . not upload the second picture.
-# TODO . set in the title content data.
-# TODO set . only can send picture.
-# TODO api for downloading the picture .
-# fixme . repair the access level.
+
+
+
+
+'''
+fixme . if the name is same . not upload the second picture.
+TODO . set in the title content data.
+TODO set . only can send picture.
+TODO api for downloading the picture .
+fixme . repair the access level.
 @app.route('/picture', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -76,15 +97,16 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return redirect(url_for('uploaded_file'))
-            return '''
-            <h2>File uploaded Completely</h3>'''
+            # return '''
+            # <h2>File uploaded Completely</h3>'''
+    #
+    # return '''
+    # <!doctype html>
+    # <title>Upload new File</title>
+    # <h1>Upload new File</h1>
+    # <form method="post" enctype=multipart/form-data>
+    #   <p><input type=file name=file>
+    #      <input type=submit value=Upload>
+    # </form>
+    # '''
 
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method="post" enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''

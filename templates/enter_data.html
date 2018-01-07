@@ -20,7 +20,7 @@ body {
 
 <br>
 
-<form action="/matlab" method="post">
+<form action="/matlab" method="post" enctype=multipart/form-data>
     <div align="center">
         Please Enter your Content for Button 1 ...
         <ul></ul>
@@ -34,9 +34,8 @@ body {
   <br>
 
     Content:<br>
-    <textarea name="content" rows="4" cols="50">
-    </textarea>
-
+    <textarea name="content" rows="4" cols="50"></textarea>
+        <input type=file name=file>
         <br>
   <input type="submit" class="btn btn-primary" value="Add Data ...">
     </b>

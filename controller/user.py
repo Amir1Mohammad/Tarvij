@@ -6,7 +6,7 @@
 __author__ = "Amir Mohammad"
 
 # flask imports :
-from flask import render_template, request, abort
+from flask import render_template, request, abort, redirect
 
 # project imports :
 from controller import app,db
@@ -21,7 +21,6 @@ def index():
         user_obj = User(username="tecvest@1010", passwordhash="09128020911",
                         firstname="tosan", lastname="tosan", gender="Male", phones="09128020911",
                         brand="none", category="none")
-
         db.session.add(user_obj)
         db.session.commit()
         return render_template('login.html')
@@ -61,6 +60,6 @@ def logout():
     username = User.logged_in_user()
     add_log(username, "Logout")
     User.logout()
-    return render_template('login.html')
+    return redirect('/')
 
 
