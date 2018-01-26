@@ -42,20 +42,22 @@ def submit1():
 
         file = request.files['file']
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            # filename = secure_filename(file.filename)
+            filename = secure_filename(str(title1)+'__'+str(User.logged_in_user()))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     if title1.strip() != '' and contetnt.strip() != '':
         db.session.add(macro_obj)
         db.session.commit()
-        user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
+        # user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
         add_log(User.logged_in_user(), "Adding data with form 1")
-        # TODO . show accept page and add back .
-        return jsonify(user_obj.to_json()), 200
+        # TODO . show accept page and add back to enter data.
+        # return jsonify(user_obj.to_json()), 200
+        return render_template('accept.html'),200
     else:
         return '''
         The data is not valid . please check it again ...
         '''
-    
+
 
 @app.route('/handbook', methods=['POST', 'GET'])
 def submit2():

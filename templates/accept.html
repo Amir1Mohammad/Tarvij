@@ -1,14 +1,17 @@
 <link href="{{ url_for('static', filename='css/accept.css') }}" rel="stylesheet" type="text/css"/>
 <link href='https://fonts.googleapis.com/css?family=Rajdhani:600' rel='stylesheet' type='text/css'>
-<div class="button">Added successfully</div>
-<br>
-<br>
-<br>
+{#<div class="button">Added successfully</div>#}
 
-<form action="/logout" method="post">
-    <input type="submit" value="logout">
-</form>
+<div align="center">
+    <form action="/login">
+        <input type="submit" class="button" value="Back"/>
+    </form>
+    <form action="/logout" method="post">
+        <input class="button" type="submit" value="logout">
+    </form>
 
+</div>
 
 <!-- made by -->
 <div class="madeBy">made by: Cloner</div>
+<div class="madeBy">Amir Mohammad </div>
