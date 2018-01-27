@@ -43,7 +43,7 @@ def show_two(username):
         for row in o:
             show = {
                 'username': row.username,
-                'handBook': row.handBook,
+                'handBook': row.handbook,
             }
             listme.append(show)
         return jsonify(jsonify=listme), 200
