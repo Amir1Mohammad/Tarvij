@@ -65,12 +65,10 @@ def submit2():
     handbook_obj = HandBook(username=User.logged_in_user(), handbook=book)
     db.session.add(handbook_obj)
     db.session.commit()
-    user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
+    # user_obj = User.query.filter_by(username=User.logged_in_user()).first_or_404()
     add_log(User.logged_in_user(), "Adding data with form 4")
+    return render_template('accept.html'), 200
     # return jsonify(user_obj.to_json()), 200
-    return '''
-        Added Hand Book successfully ...
-    ''', 200
 
 
 

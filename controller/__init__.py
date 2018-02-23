@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 PROJECT_HOME = os.path.dirname(os.path.realpath(__file__))
 UPLOAD_FOLDER = '{}/uploads/'.format(PROJECT_HOME)
-app.config['JSON_AS_ASCII'] = True
+app.config['JSON_AS_ASCII'] = False
 db.init_app(app)
 
 __Author__ = "Amir Mohammad"

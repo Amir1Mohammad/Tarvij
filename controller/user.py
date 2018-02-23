@@ -44,7 +44,9 @@ def login():
         password = request.form['password']
         user_obj = User.query.filter_by(username=username).first_or_404()
         if user_obj.passwordhash != password:
+            add_log(username, "Unsuccessful Try to login")
             abort(403)
+
         user_obj.login()
         add_log(username, "Login")
         if username == "tecvest@1010":
@@ -52,6 +54,7 @@ def login():
         else:
             return render_template("enter_data.html")
     else:
+
         abort(405)
 
 
