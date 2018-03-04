@@ -11,7 +11,6 @@ import os
 from flask import request, jsonify, abort, render_template
 from werkzeug.utils import secure_filename
 
-
 # project imports :
 from controller import db, app
 from models.user import User
@@ -37,13 +36,13 @@ def submit1():
         title5 = request.form['title5']
         contetnt = request.form['content']
 
-        macro_obj = Mac(username=User.logged_in_user(), title1=title1,title2=title2,title3=title3,
+        macro_obj = Mac(username=User.logged_in_user(), title1=title1, title2=title2, title3=title3,
                         title4=title4, title5=title5, content=contetnt)
 
         file = request.files['file']
         if file and allowed_file(file.filename):
             # filename = secure_filename(file.filename)
-            filename = secure_filename(str(title1)+'__'+str(User.logged_in_user()))
+            filename = secure_filename(str(title1) + '__' + str(User.logged_in_user()))
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     if title1.strip() != '' and contetnt.strip() != '':
         db.session.add(macro_obj)
@@ -52,7 +51,7 @@ def submit1():
         add_log(User.logged_in_user(), "Adding data with form 1")
         # TODO . show accept page and add back to enter data.
         # return jsonify(user_obj.to_json()), 200
-        return render_template('accept.html'),200
+        return render_template('accept.html'), 200
     else:
         return '''
         The data is not valid . please check it again ...
@@ -71,8 +70,13 @@ def submit2():
     # return jsonify(user_obj.to_json()), 200
 
 
-
-
+@app.route('/editing', methods=['POST','DELETE', 'GET'])
+def editing():
+    ser = User.logged_in_user()
+    title_obj = Mac.query.filter_by(username=ser).all()
+    # for tit in title_obj:
+    #     print tit.title1
+    return render_template('editing.html',title_obj=title_obj)
 
 
 '''
@@ -101,15 +105,14 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return redirect(url_for('uploaded_file'))
             # return '''
-            # <h2>File uploaded Completely</h3>'''
-    #
-    # return '''
-    # <!doctype html>
-    # <title>Upload new File</title>
-    # <h1>Upload new File</h1>
-    # <form method="post" enctype=multipart/form-data>
-    #   <p><input type=file name=file>
-    #      <input type=submit value=Upload>
-    # </form>
-    # '''
-
+# <h2>File uploaded Completely</h3>'''
+#
+# return '''
+# <!doctype html>
+# <title>Upload new File</title>
+# <h1>Upload new File</h1>
+# <form method="post" enctype=multipart/form-data>
+#   <p><input type=file name=file>
+#      <input type=submit value=Upload>
+# </form>
+# '''

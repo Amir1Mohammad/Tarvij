@@ -15,7 +15,7 @@ from controller.extension import db
 __Author__ = "Amir Mohammad"
 
 
-def set_limit_log(min=3,max=50):
+def set_limit_log(min=3, max=50):
     row_count = Log.query.count()
     for i in range(2):
         if not min < row_count <= max:
@@ -51,7 +51,15 @@ def add_admin():
 
         db.session.add(user_obj)
         db.session.commit()
-        return "Admin Added Successfully", 200
+        return '''
+                <script>
+        function goBack() {
+            window.history.back();
+        }
+        </script>
+                Admin Added Successfully.
+                <button onclick="goBack()">Go Back</button>
+        ''', 200
 
 
 @app.route('/login/delete/<username>')
@@ -71,7 +79,7 @@ def delete_admin(username):
 
 @app.route('/log/<username>')
 def show_log_name(username):
-    user_obj = User.query.filter_by(username=username).first_or_404()
+    user_obj = User.query.order_by(username=username).first_or_404()
     print user_obj.to_json()
     return jsonify(user_obj.to_json())
     # return render_template('show_user_name.html', log_obj_q=user_obj.to_json())

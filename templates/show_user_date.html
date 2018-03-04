@@ -16,39 +16,47 @@
 
 <body>
 <div align="center">
-<form action="/logout" method="post">
-    <input class="btn btn-danger" type="submit" value="logout">
-</form>
+    <form action="/logout" method="post">
+        <input class="btn btn-danger" type="submit" value="logout">
+    </form>
 </div>
 <div align="left" class="panel-body">
-{% block page_content %}
-	<div class="panel panel-default">
-		<div class="panel-body" align="center" style="margin-right: auto">
+    {% block page_content %}
+        <div class="panel panel-default">
+        <div class="panel-body" align="center" style="margin-right: auto">
 
-        <div class="w3-container">
-            {% for q in log_obj_q %}
+            <div class="w3-container">
+                {% for q in log_obj_q %}
 
-                <div class="w3-third "  style="background-color: lightskyblue"  >
-                <fieldset>
-                <legend style="font-weight: bold" >Log History:</legend>
-                <p style="font-weight: bold"><td class="col-sm-4 ">{{ q.id }}</td >:ردیف</p>
-                <p style="font-weight: bold"><td class="col-sm-3">{{ q.action}}</td>:نوع کار انجام شده</p>
-                <p style="font-weight: bold">در ساعت : <td class="col-sm-1">{{ q.time }}</td></p>
-                <p style="font-weight: bold"><td class="col-sm-3">{{ q.user.username }}</td>:کار انجام شده توسط</p>
-                <hr size="10">
-                </fieldset>
-                </div>
+                    <div  class="w3-third " style="background-color: lightskyblue">
+                        <fieldset>
+                            <legend style="font-weight: bold">Log History:</legend>
+                            <p style="font-weight: bold">
+                            <td class="col-sm-4 ">{{ q.id }}</td>
+                            :ردیف</p>
+                            <p style="font-weight: bold">
+                            <td class="col-sm-3">{{ q.action }}</td>
+                            :نوع کار انجام شده</p>
+                            <p style="font-weight: bold">در ساعت :
+                            <td class="col-sm-1">{{ q.time }}</td>
+                            </p>
+                            <p style="font-weight: bold">
+                            <td class="col-sm-3">{{ q.user.username }}</td>
+                            :کار انجام شده توسط</p>
+                            <hr size="10">
+                        </fieldset>
+                    </div>
 
-                </td>
+                    </td>
 
-            {% endfor %}
+                {% endfor %}
 
 
-		</div>
+            </div>
 
-	</div>
-{% endblock %}
+        </div>
+    {% endblock %}
 
-</div>
+    </div>
 </body>
 </html>

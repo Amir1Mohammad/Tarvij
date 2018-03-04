@@ -4,7 +4,7 @@
 
 
 # flask imports :
-from flask import jsonify, abort, send_file
+from flask import jsonify, abort, send_file,render_template
 
 # project imports:
 from models.macros import Mac
@@ -51,17 +51,18 @@ def show_two(username):
         abort(403)
 
 
-# @app.route('/file')
-# def file_downloads():
-#     try:
-#         return render_template('down.html')
-#     except Exception as e:
-#         return str(e)
+@app.route('/file')
+def file_downloads():
+    try:
+        return render_template('down.html')
+    except Exception as e:
+        return str(e)
 
 
-# @app.route('/shows')
-# def return_files_tut():
-#     try:
-#         return send_file('test.png')
-#     except Exception as e:
-#         return str(e)
+@app.route('/shows/<filename>')
+def return_files_tut(filename):
+    try:
+        #filename = 'amir__test'
+        return send_file('../static/picture/%s' % filename)
+    except Exception as e:
+        return str(e)

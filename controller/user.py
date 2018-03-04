@@ -12,6 +12,7 @@ from flask import render_template, request, abort, redirect
 from controller import app,db
 from models.user import User
 from log import add_log
+from environ import user_list, pass_list
 
 
 @app.route('/')
@@ -36,6 +37,7 @@ def login():
             abort(403)
         elif User.logged_in_user() == "tecvest@1010":
             return render_template('admin_home.html')
+
         else:
             return render_template("enter_data.html")
 
