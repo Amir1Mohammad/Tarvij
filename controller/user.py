@@ -12,7 +12,7 @@ from flask import render_template, request, abort, redirect
 from controller import app,db
 from models.user import User
 from log import add_log
-from environ import user_list, pass_list
+
 
 
 @app.route('/')

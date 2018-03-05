@@ -17,4 +17,4 @@ db.init_app(app)
 
 __Author__ = "Amir Mohammad"
 
-from controller import log, user, admin, fof, api, post, admin2
+from controller import log, user, admin, fof, api, post
