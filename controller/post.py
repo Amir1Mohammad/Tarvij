@@ -8,7 +8,7 @@ __Author__ = "Amir Mohammad"
 import os
 
 # flask imports :
-from flask import request, jsonify, abort, render_template
+from flask import request, abort, render_template
 from werkzeug.utils import secure_filename
 
 # project imports :
@@ -70,49 +70,29 @@ def submit2():
     # return jsonify(user_obj.to_json()), 200
 
 
-@app.route('/editing', methods=['POST','DELETE', 'GET'])
+@app.route('/editing', methods=['POST', 'GET'])
 def editing():
-    ser = User.logged_in_user()
-    title_obj = Mac.query.filter_by(username=ser).all()
-    # for tit in title_obj:
-    #     print tit.title1
-    return render_template('editing.html',title_obj=title_obj)
+    if request.method == "GET":
+        if User.logged_in_user() is None:
+            abort(403)
+    elif request.method == "POST":
+        ser = User.logged_in_user()
+        title_obj = Mac.query.filter_by(username=ser).all()
+        # for tit in title_obj:
+        #     print tit.title1
+        return render_template('editing.html', title_obj=title_obj)
 
 
-'''
-fixme . if the name is same . not upload the second picture.
-TODO . set in the title content data.
-TODO set . only can send picture.
-TODO api for downloading the picture .
-fixme . repair the access level.
-@app.route('/picture', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            print "The Upload file is empty"
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            print "The Upload file is empty"
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # return redirect(url_for('uploaded_file'))
-            # return '''
-# <h2>File uploaded Completely</h3>'''
-#
-# return '''
-# <!doctype html>
-# <title>Upload new File</title>
-# <h1>Upload new File</h1>
-# <form method="post" enctype=multipart/form-data>
-#   <p><input type=file name=file>
-#      <input type=submit value=Upload>
-# </form>
-# '''
+@app.route('/dele', methods=['POST', 'GET'])
+def del_title():
+    numberis = request.form['delete']
+    if numberis:
+        Mac.query.filter_by(id=numberis).delete()
+        return '''<h2>
+        Deleted Title Done.
+        </h2>'''
+    else:
+        return '''<h1>
+                Deleted Title Failed !!!
+                </h1>'''
+

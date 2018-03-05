@@ -17,16 +17,23 @@ body {
 </style>
 
 <body>
+<br>
 <div align="center">
     <form action="/logout" method="post">
         <input class="btn btn-danger" type="submit" value="logout">
     </form>
+    <br>
+    <form action="/dele" method="post">
+        Delete Number :
+        <input type="number" name="delete" value="Enter The number you want to Delete .">
+        <input class="btn btn-info" name="del_button" type="submit" value="Delete">
+    </form>
 </div>
-
+<legend><br>
 <div align="right" class="w3-container">
 {% for t in title_obj %}
     <fieldset>
-    <legend>{{ t.title1 }}</legend>
+    <legend>{{ t.title1 }}:{{ t.id }}</legend>
 
     </fieldset>
 {% endfor %}
