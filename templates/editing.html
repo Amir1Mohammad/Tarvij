@@ -10,30 +10,48 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-    <style>
+
+        <style>
 body {
-    background-color:lightgray;
+    background-color:lightgreen;
 }
 </style>
 
 <body>
+
+
 <br>
+
 <div align="center">
+
     <form action="/logout" method="post">
         <input class="btn btn-danger" type="submit" value="logout">
     </form>
     <br>
+<div align="center">
+    <b>Your User name is : {{ ser }}</b>
+</div>
     <form action="/dele" method="post">
         Delete Number :
         <input type="number" name="delete" value="Enter The number you want to Delete .">
         <input class="btn btn-info" name="del_button" type="submit" value="Delete">
     </form>
 </div>
+
+
+
 <legend><br>
-<div align="right" class="w3-container">
+    <div align="right" class="w3-container">
 {% for t in title_obj %}
     <fieldset>
-    <legend>{{ t.title1 }}:{{ t.id }}</legend>
+    <legend>
+        <b><h2>عنوان اصلی = {{ t.title1 }}</h2></b>
+        <h4>زیر عنوان ۲ = {{ t.title2 }} </h4>
+        <h4>زیر عنوان ۳ = {{ t.title3 }} </h4>
+        <h4>زیر عنوان ۴ = {{ t.title4 }} </h4>
+        <h4>زیر عنوان ۵ = {{ t.title5 }} </h4>
+        <h6>شماره سریال = {{ t.id }} </h6>
+    </legend>
 
     </fieldset>
 {% endfor %}

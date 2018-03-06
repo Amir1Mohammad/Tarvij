@@ -51,6 +51,7 @@ def submit1():
         add_log(User.logged_in_user(), "Adding data with form 1")
         # TODO . show accept page and add back to enter data.
         # return jsonify(user_obj.to_json()), 200
+
         return render_template('accept.html'), 200
     else:
         return '''
@@ -78,9 +79,13 @@ def editing():
     elif request.method == "POST":
         ser = User.logged_in_user()
         title_obj = Mac.query.filter_by(username=ser).all()
-        # for tit in title_obj:
-        #     print tit.title1
-        return render_template('editing.html', title_obj=title_obj)
+        category = User.query.filter_by(username=ser).all()
+        # us_obj = User.query.filter_by(username=ser).all
+
+        for tit in category:
+            print tit.category
+        #     print tit.id
+        return render_template('editing.html', title_obj=title_obj,ser=ser)
 
 
 @app.route('/dele', methods=['POST', 'GET'])

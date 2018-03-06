@@ -15,19 +15,16 @@ from controller.extension import db
 __Author__ = "Amir Mohammad"
 
 
-def set_limit_log(min=3, max=50):
-    row_count = Log.query.count()
-    for i in range(2):
-        if not min < row_count <= max:
-            print "the member of log : ", row_count
-            limit_log_person = Log.query.limit(2).all()
-            me = limit_log_person[1]
-            db.session.delete(me)
-            db.session.commit()
-        else:
-            row_count = Log.query.count()
-            print "the member of log : ", row_count
-
+# def set_limit_log(min=3, max=50):
+#     row_count = Log.query.count()
+#     first = Log.query.order_by(User.username).all()
+#     print row_count
+#     if row_count >= max and row_count < min:
+#         Log.query.filter_by(id=first).delete()
+#         row_count = Log.query.count()
+#         print "new  :", row_count
+#     else:
+#         print row_count
 
 @app.route('/add_admin', methods=['POST', 'GET'])
 def add_admin():
@@ -89,8 +86,8 @@ def show_log_name(username):
 def show_log_all():
     if User.logged_in_user() == "tecvest@1010":
         log_obj_q = Log.query.all()
+
         try:
-            # set_limit_log()
             return render_template('show_user_date.html', log_obj_q=log_obj_q)
         except:
             return render_template('show_user_date.html')
