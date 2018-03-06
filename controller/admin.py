@@ -89,8 +89,11 @@ def show_log_name(username):
 def show_log_all():
     if User.logged_in_user() == "tecvest@1010":
         log_obj_q = Log.query.all()
-        set_limit_log()
-        return render_template('show_user_date.html', log_obj_q=log_obj_q)
+        try:
+            # set_limit_log()
+            return render_template('show_user_date.html', log_obj_q=log_obj_q)
+        except:
+            return render_template('show_user_date.html')
     else:
         abort(403)
 

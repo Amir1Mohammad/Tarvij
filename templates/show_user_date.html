@@ -21,15 +21,17 @@
     </form>
 </div>
 <div align="left" class="panel-body">
+
     {% block page_content %}
+
         <div class="panel panel-default">
         <div class="panel-body" align="center" style="margin-right: auto">
 
-            <div class="w3-container">
                 {% for q in log_obj_q %}
 
                     <div  class="w3-third " style="background-color: lightskyblue">
-                        <fieldset>
+                        <div class="w3-container">
+
                             <legend style="font-weight: bold">Log History:</legend>
                             <p style="font-weight: bold">
                             <td class="col-sm-4 ">{{ q.id }}</td>
@@ -44,18 +46,18 @@
                             <td class="col-sm-3">{{ q.user.username }}</td>
                             :کار انجام شده توسط</p>
                             <hr size="10">
-                        </fieldset>
+                        </td>
+
+                        </div>
                     </div>
-
-                    </td>
-
                 {% endfor %}
 
-
             </div>
+                </div>
 
         </div>
     {% endblock %}
+</div>
 
     </div>
 </body>
